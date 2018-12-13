@@ -1,7 +1,10 @@
 const http = require('http');
+const fs = require('fs');
 
 const hostname = '127.0.0.1';
-const port = 3001;
+//const port = 3000;
+
+const port = fs.readFileSync( "./files/port-number");
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
@@ -9,11 +12,6 @@ const server = http.createServer((req, res) => {
   res.end('Hello, World!\n');
 });
 
-server.listen(port, hostname, () => {
+server.listen(port.readUIntBE(), hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
-
-//output:
-
-// C:\Users\Deepika\Desktop\IIHT\NodeJS\projects> node hello-world.js
-// Server running at http://127.0.0.1:3000/
